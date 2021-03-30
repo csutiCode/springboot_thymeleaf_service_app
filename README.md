@@ -1,1 +1,1 @@
-Service WebApp with Spring Boot,Spring Security and Thymeleaf.
+WebApp with Spring Boot,Spring Security and Thymeleaf.
