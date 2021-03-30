@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Management System</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+
+    <hr>
+    <h2> Sign Up </h2>
+
+
+    <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+    <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
+
+
+
+    <form action="#" th:action="@{/registry}" th:object="${userDto}", method="POST">
+
+        <input type="text" th:field = "*{username}"
+               placeholder="Username" class="form-control mb-4 col-4">
+
+        <input type="text" th:field = "*{password}"
+               placeholder="Password" class="form-control mb-4 col-4">
+
+        <input type="text" th:field = "*{repeatedPassword}"
+               placeholder="Password again" class="form-control mb-4 col-4">
+
+
+        <button type="submit" class="btn btn-info col-2"> Sign Up</button>
+    </form>
+</div>
+</body>
+</html>

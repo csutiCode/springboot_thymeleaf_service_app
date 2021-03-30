@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+          integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+          crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Service Management System</title>
+</head>
+
+
+<nav class="navbar">
+    <form action="#" th:action="@{/select}" th:object="${selected}" method="POST">
+        <!-- to sort the services by cities  -->
+        <select  name="city" >
+            <label>Select City</label>
+            <option value ="none">...</option>
+            <option th:each="city : ${cities}"
+                    th:text="${city}"
+                    th:value="${city}"></option>
+        </select>
+
+        <select  name="city" >
+            <label>Select City</label>
+            <option value ="none">...</option>
+            <option th:each="category : ${categories}"
+                    th:text="${category}"
+                    th:value="${category}"></option>
+        </select>
+
+
+        <button type="submit"> Select City and Category</button>
+
+    </form>
+
+</nav>
+
+
+

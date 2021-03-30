@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Service Management System</title>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+          integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+          crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+</head>
+<body>
+<!-- with the function get all -->
+<h1 th:if="${selected!=null}">Service List
+    <!-- names of the selected categories -->
+
+    <p th:object="${selected}" th:text="${selected.city}">     </p>
+    <p th:object="${selected}" th:text="${selected.category}">     </p>
+</h1>
+
+<!-- if no services found -->
+<div th:if="${services.empty}" >
+    <p> No services found with the given parameters. </p>
+</div>
+
+<div th:if="${!services.empty}" class="container my-2">
+
+
+    <table   border="1" class = "table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>
+                <a>
+                    Name</a>
+            </th>
+            <th>
+                <a>
+                    Service</a>
+            </th>
+            <th>
+                <a>
+                    E-mail</a>
+            </th>
+            <th>
+                <a>
+                    Telephone</a>
+            </th>
+
+            <th> Options </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="service : ${services}">
+            <td th:text="${service.name}"></td>
+            <td th:text="${service.providedService}"></td>
+            <td th:text="${service.email}"></td>
+            <td th:text="${service.telephone}"></td>
+
+            <td> <a th:href=@{/info/{id}(id=${service.id})} class="btn btn-primary">Info</a>
+                <a th:href="@{/showNewQualificationForm/{id}(id=${service.id})}" class="btn btn-primary">Qualify</a>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div th:if = "${totalPages > 1}">
+        <div class = "row col-sm-10">
+            <div class = "col-sm-2">
+
+            </div>
+            <div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i} }">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

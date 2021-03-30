@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Management System</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+    <h1> Info Page</h1>
+    <hr>
+
+
+    <input type="hidden" th:field="*{id}" />
+        <!-- TODO: informations about the service        -->
+
+    <table style="width:100%">
+        <tr>
+            <th>Name</th>
+            <th>Service</th>
+            <th>E-Mail</th>
+            <th>Telephone</th>
+            <th>Rank</th>
+            <th>About</th>
+
+
+        </tr>
+        <tr>
+            <td th:text=${service.name}></td>
+            <td th:text=${service.providedService}></td>
+            <td th:text=${service.email}></td>
+            <td th:text=${service.telephone}></td>
+            <td th:text=${service.about}></td>
+
+        </tr>
+        <tr>
+
+    </table>
+
+    <hr>
+
+    <p style="font-size: 24px">  Qualifications: </p>
+
+    <hr>
+
+        <article th:each="qualification : ${qualifications}">
+            <p th:text="${qualification.qualifier}">
+                <a> : </a>
+            </p> <p th:text="${qualification.text}"> </p>
+            <p th:text="${qualification.date}"> </p>
+            <hr>
+
+
+        </article>
+
+    <form action="#" th:action="@{/}"  method="GET">
+        <button type="submit" class="btn btn-info col-4"> Back</button>
+
+    </form>
+
+</div>
+
+
+
+
+</body>
+</html>

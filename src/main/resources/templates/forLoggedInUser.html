@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Service Management System</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+          integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+          crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+
+<div class="container my-2">
+    <h1>Service List</h1>
+
+    <a th:href = "@{/showNewServiceForm}" class="btn btn-primary btn-sm mb-3"> Add Service </a>
+    <a th:href = "@{/}" class="btn btn-primary btn-sm mb-3"> Logout </a>
+
+    <table border="1" class = "table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>
+                <a>
+                    Name</a>
+            </th>
+            <th>
+                <a>
+                    Service</a>
+            </th>
+            <th>
+                <a>
+                    E-mail</a>
+            </th>
+            <th>
+                <a>
+                    Telephone</a>
+            </th>
+            <th> Options </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="service : ${listServices}">
+            <td th:text="${service.name}"></td>
+            <td th:text="${service.providedService}"></td>
+            <td th:text="${service.email}"></td>
+            <td th:text="${service.telephone}"></td>
+
+
+           <td> <a th:href="@{/showFormForUpdate/{id}(id=${service.id})}" class="btn btn-primary">Update</a>
+
+                <a th:href="@{/deleteServiceById/{id}(id=${service.id})}" class="btn btn-danger">Delete</a>
+
+
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if = "${totalPages > 1}">
+        <div class = "row col-sm-10">
+            <div class = "col-sm-2">
+                Total Rows: [[${totalItems}]]
+            </div>
+            <div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+            </div>
+            <div class = "col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
+
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
